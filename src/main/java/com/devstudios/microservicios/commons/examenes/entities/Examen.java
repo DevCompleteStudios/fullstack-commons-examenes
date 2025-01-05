@@ -18,6 +18,9 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 
@@ -29,6 +32,8 @@ public class Examen {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Size(min = 4, max = 30)
     private String nombre;
 
     @JsonIgnoreProperties(value = {"examen"}, allowGetters = true)
@@ -40,6 +45,7 @@ public class Examen {
     private Date createdAt = new Date();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
     private Asignatura asignatura;
 
 
