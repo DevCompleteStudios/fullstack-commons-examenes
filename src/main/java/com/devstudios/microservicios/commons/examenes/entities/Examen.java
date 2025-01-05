@@ -13,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
@@ -37,6 +38,9 @@ public class Examen {
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Asignatura asignatura;
 
 
     public Long getId() {
@@ -71,6 +75,12 @@ public class Examen {
     public void removePregunta(Pregunta pregunta) {
         this.preguntas.remove(pregunta);
         pregunta.setExamen(null);
+    }
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
 
